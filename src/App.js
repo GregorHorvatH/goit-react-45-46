@@ -1,9 +1,11 @@
-function App() {
+import Cart from './container/Cart';
+
+const App = () => {
   return (
     <div className='App'>
-      <p>lorem ipsum</p>
+      <Cart />
     </div>
   );
-}
+};
 
 export default App;
