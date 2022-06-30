@@ -1,3 +1,4 @@
+import Button from '../Button';
 import style from './style.module.scss';
 
 const CartInputForm = () => {
@@ -5,7 +6,7 @@ const CartInputForm = () => {
 
   return (
     <div className={style.cartInputForm}>
-      <form>
+      <form className={style.form}>
         <label className={style.label}>
           <span>name</span>
           <input type='text' />
@@ -16,7 +17,7 @@ const CartInputForm = () => {
           <input type='number' />
         </label>
 
-        <button type='submit'>+ add</button>
+        <Button type='submit'>+ add</Button>
       </form>
     </div>
   );

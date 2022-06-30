@@ -9,14 +9,23 @@ const useStyles = createUseStyles({
     alignItems: 'center',
     columnGap: 30,
     backgroundColor: '#bada55',
+    justifyContent: 'space-between',
   },
-  column: {
+  leftCol: {
     display: 'flex',
     flexDirection: 'column',
+    minWidth: 100,
+  },
+  rightCol: {
+    display: 'flex',
   },
   counter: {
     display: 'flex',
     columnGap: 10,
+  },
+  amount: {
+    minWidth: 50,
+    textAlign: 'right',
   },
   value({ item }) {
     return {
@@ -32,7 +41,7 @@ const CartItem = ({ item }) => {
 
   return (
     <div className={styles.cartItem}>
-      <div className={styles.column}>
+      <div className={styles.leftCol}>
         <span>{item.name}</span>
         <span>{item.price}$</span>
       </div>
@@ -43,7 +52,7 @@ const CartItem = ({ item }) => {
         <button>+</button>
       </div>
 
-      <span>{amount}$</span>
+      <span className={styles.amount}>{amount}$</span>
       <CloseButton item={item} />
     </div>
   );

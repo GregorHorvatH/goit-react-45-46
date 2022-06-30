@@ -3,8 +3,10 @@ import styled from 'styled-components';
 const Button = styled.button`
   background-color: ${(props) => (props.close ? 'palevioletred' : 'lightblue')};
   border: none;
-  color: ${(props) => (props.isRed ? 'red' : 'white')};
+  color: ${(props) => (props.close ? 'white' : 'black')};
+  /* color: ${(props) => (props.isRed ? 'red' : 'white')}; */
   border-radius: 5px;
+  padding: 0 10px;
 `;
 
 export const NormalButton = () => <Button>x</Button>;

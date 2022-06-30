@@ -2,8 +2,23 @@
   padding: 10px;
   background-color: tomato;
 
-  .label {
-    color: white;
-    margin-right: 10px;
+  .form {
+    display: flex;
+
+    .label {
+      display: flex;
+      color: white;
+      margin-right: 10px;
+      column-gap: 10px;
+      flex: 1;
+
+      span {
+        text-align: right;
+      }
+
+      input {
+        flex: 1;
+      }
+    }
   }
 }

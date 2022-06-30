@@ -3,6 +3,7 @@ const Loader = () => (
     style={{
       color: 'green',
       fontWeight: 800,
+      textAlign: 'center',
     }}
   >
     Loading...

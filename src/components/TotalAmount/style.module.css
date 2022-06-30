@@ -1,3 +1,5 @@
 .totalAmount {
   font-weight: 800;
+  text-align: right;
+  padding: 0 10px;
 }
