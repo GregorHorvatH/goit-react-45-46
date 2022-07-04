@@ -10,8 +10,8 @@ const Button = styled.button`
 
 export const NormalButton = () => <Button>x</Button>;
 
-export const CloseButton = ({ item = {} }) => (
-  <Button close isRed={item.count > 0}>
+export const CloseButton = ({ item = {}, onRemoveItem }) => (
+  <Button close isRed={item.count > 0} onClick={onRemoveItem}>
     x
   </Button>
 );
