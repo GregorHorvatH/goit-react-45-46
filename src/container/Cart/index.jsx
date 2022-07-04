@@ -2,6 +2,7 @@ import CartInputForm from '../../components/CartInputForm';
 import Loader from '../../components/Loader';
 import CartItemList from '../../components/CartItemList';
 import TotalAmount from '../../components/TotalAmount';
+import styles from './styles.module.css';
 
 const initialState = [
   { id: '1', name: 'printer', price: 110, count: 2 },
@@ -13,7 +14,7 @@ const Cart = () => {
   // logic here....
 
   return (
-    <div className='cart'>
+    <div className={styles.cart}>
       <CartInputForm />
       <Loader />
       <CartItemList items={initialState} />

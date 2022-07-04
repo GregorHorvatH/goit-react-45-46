@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
 const Button = styled.button`
-  background-color: ${(props) => (props.close ? 'palevioletred' : 'lightblue')};
+  background-color: ${(props) => (props.close ? '#cba7db' : 'lightblue')};
   border: none;
   color: ${(props) => (props.close ? 'white' : 'black')};
-  /* color: ${(props) => (props.isRed ? 'red' : 'white')}; */
   border-radius: 5px;
   padding: 0 10px;
 `;

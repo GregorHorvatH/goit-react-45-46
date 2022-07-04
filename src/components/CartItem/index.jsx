@@ -8,7 +8,8 @@ const useStyles = createUseStyles({
     padding: 10,
     alignItems: 'center',
     columnGap: 30,
-    backgroundColor: '#bada55',
+    // backgroundColor: '#bada55',
+    backgroundColor: '#c9e0e6',
     justifyContent: 'space-between',
   },
   leftCol: {
