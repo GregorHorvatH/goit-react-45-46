@@ -60,7 +60,7 @@ const CartItem = ({ item, onRemoveItem, onChangeCount }) => {
       </div>
 
       <span className={styles.amount}>{amount}$</span>
-      <CloseButton item={item} onRemoveItem={remove} />
+      <CloseButton item={item} onClick={remove} />
     </div>
   );
 };
