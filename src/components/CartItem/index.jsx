@@ -59,7 +59,9 @@ const CartItem = ({ item, onRemoveItem, onChangeCount }) => {
         <button onClick={increment}>+</button>
       </div>
 
-      <span className={styles.amount}>{amount}$</span>
+      <span className={styles.amount}>
+        {amount}${item.extendedGuarantee && ' +10%'}
+      </span>
       <CloseButton item={item} onClick={remove} />
     </div>
   );

@@ -6,39 +6,33 @@ import TotalAmount from '../../components/TotalAmount';
 import styles from './styles.module.css';
 
 const initialState = [
-  { id: '183756', name: 'printer', price: 110, count: 2 },
-  { id: '212345', name: 'RAM', price: 30, count: 0 },
-  { id: '323522', name: 'motherboard', price: 150, count: 1 },
-  { id: '434556', name: 'mouse', price: 15, count: 4 },
+  {
+    id: '183756',
+    name: 'printer',
+    price: 110,
+    count: 2,
+    extendedGuarantee: false,
+  },
+  { id: '212345', name: 'RAM', price: 30, count: 0, extendedGuarantee: false },
+  {
+    id: '323522',
+    name: 'motherboard',
+    price: 150,
+    count: 1,
+    extendedGuarantee: true,
+  },
+  {
+    id: '434556',
+    name: 'mouse',
+    price: 15,
+    count: 4,
+    extendedGuarantee: false,
+  },
 ];
 
 const Cart = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [items, setItems] = useState(initialState);
-
-  // const handleDecrement = (id) =>
-  //   setItems((prev) =>
-  //     prev.map((item) =>
-  //       item.id === id
-  //         ? {
-  //             ...item,
-  //             count: item.count > 0 ? item.count - 1 : 0,
-  //           }
-  //         : item
-  //     )
-  //   );
-
-  // const handleIncrement = (id) =>
-  //   setItems((prev) =>
-  //     prev.map((item) =>
-  //       item.id === id
-  //         ? {
-  //             ...item,
-  //             count: item.count + 1,
-  //           }
-  //         : item
-  //     )
-  //   );
 
   // +1, -1
   const handleChangeCount = (id, step) =>
@@ -56,9 +50,11 @@ const Cart = () => {
   const handleRemoveItem = (id) =>
     setItems((prev) => prev.filter((item) => item.id !== id));
 
+  const handleAddItem = (newItem) => setItems((prev) => [...prev, newItem]);
+
   return (
     <div className={styles.cart}>
-      <CartInputForm />
+      <CartInputForm onSubmit={handleAddItem} />
 
       {isLoading && <Loader />}
 
