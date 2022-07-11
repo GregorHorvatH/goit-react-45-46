@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { createUseStyles } from 'react-jss';
 import { CloseButton } from '../Button';
@@ -37,6 +38,8 @@ const useStyles = createUseStyles({
 });
 
 const CartItem = ({ item, onRemoveItem, onChangeCount }) => {
+  const [timerValue, setTimerValue] = useState(0);
+
   const styles = useStyles({ item });
   const amount = item.count * item.price;
 
@@ -46,11 +49,27 @@ const CartItem = ({ item, onRemoveItem, onChangeCount }) => {
 
   console.log('render item:', item.id);
 
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setTimerValue((prev) => prev + 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(timerId);
+      console.log('componentWillUnmount');
+    };
+  }, []);
+
+  if (!item.name) {
+    throw new Error('sdfjghsdfklgjshfgslk jdfjsgk sdgk');
+  }
+
   return (
     <div className={styles.cartItem}>
       <div className={styles.leftCol}>
         <span>{item.name}</span>
         <span>{item.price}$</span>
+        <span>{timerValue}</span>
       </div>
 
       <div className={styles.counter}>

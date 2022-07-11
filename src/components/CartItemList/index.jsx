@@ -1,12 +1,15 @@
 import propTypes from 'prop-types';
 
 import CartItem from '../CartItem';
+import ErrorBoundary from '../ErrorBoundary';
 import styles from './style.module.css';
 
 const CartItemList = ({ items, ...rest }) => (
   <div className={styles.cartItemList}>
     {items.map((item) => (
-      <CartItem key={item.id} item={item} {...rest} />
+      <ErrorBoundary key={item.id}>
+        <CartItem item={item} {...rest} />
+      </ErrorBoundary>
     ))}
   </div>
 );

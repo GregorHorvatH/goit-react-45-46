@@ -1,0 +1,14 @@
+.list {
+}
+
+.item:nth-child(odd) {
+  background-color: antiquewhite;
+}
+
+.item:nth-child(even) {
+  background-color: rgb(186, 178, 169);
+}
+
+.item:last-child {
+  background-color: aqua;
+}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CartInputForm from '../../components/CartInputForm';
 import Loader from '../../components/Loader';
 import CartItemList from '../../components/CartItemList';
@@ -32,7 +32,7 @@ const initialState = [
 
 const Cart = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [items, setItems] = useState(initialState);
+  const [items, setItems] = useState([]);
 
   // +1, -1
   const handleChangeCount = (id, step) =>
@@ -52,6 +52,29 @@ const Cart = () => {
 
   const handleAddItem = (newItem) => setItems((prev) => [...prev, newItem]);
 
+  useEffect(() => {
+    // console.log('Cart: componentDidMount');
+    // console.log('fetch...');
+    // setIsLoading(true);
+    // setTimeout(() => {
+    //   setItems(initialState);
+    //   setIsLoading(false);
+    // }, 2000);
+    try {
+      setItems(JSON.parse(localStorage.getItem('cart')));
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, []); // componentDidMount
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(items));
+  }, [items]);
+
+  // useEffect(() => {
+  //   console.log('is loading', isLoading);
+  // }, [isLoading]);
+
   return (
     <div className={styles.cart}>
       <CartInputForm onSubmit={handleAddItem} />
@@ -62,8 +85,6 @@ const Cart = () => {
         items={items}
         onChangeCount={handleChangeCount}
         onRemoveItem={handleRemoveItem}
-        // onDecrement={handleDecrement}
-        // onIncrement={handleIncrement}
       />
       <TotalAmount items={items} />
     </div>

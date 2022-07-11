@@ -16,10 +16,10 @@ const CartInputForm = ({ onSubmit }) => {
     e.preventDefault();
 
     onSubmit({
-      id: Date.now(),
+      id: Date.now().toString(),
       count: 1,
       name,
-      price,
+      price: Number(price),
       extendedGuarantee,
     });
 
