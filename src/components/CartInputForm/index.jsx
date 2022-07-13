@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import Button from '../Button';
 import style from './style.module.scss';
 
@@ -16,7 +16,7 @@ const CartInputForm = ({ onSubmit }) => {
     e.preventDefault();
 
     onSubmit({
-      id: Date.now().toString(),
+      // id: Date.now().toString(),
       count: 1,
       name,
       price: Number(price),

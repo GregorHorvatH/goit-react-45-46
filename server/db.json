@@ -1,0 +1,32 @@
+{
+  "cart": [
+    {
+      "id": "323522",
+      "name": "motherboard",
+      "price": 150,
+      "count": 5,
+      "extendedGuarantee": true
+    },
+    {
+      "id": "434556",
+      "name": "mouse",
+      "price": 15,
+      "count": 8,
+      "extendedGuarantee": false
+    },
+    {
+      "name": "CPU",
+      "price": 200,
+      "count": 3,
+      "extendedGuarantee": false,
+      "id": "E6y7-sv"
+    },
+    {
+      "count": 2,
+      "name": "dfbdgs",
+      "price": 123,
+      "extendedGuarantee": true,
+      "id": "2VIyrSq"
+    }
+  ]
+}

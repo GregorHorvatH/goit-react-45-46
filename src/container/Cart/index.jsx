@@ -3,83 +3,91 @@ import CartInputForm from '../../components/CartInputForm';
 import Loader from '../../components/Loader';
 import CartItemList from '../../components/CartItemList';
 import TotalAmount from '../../components/TotalAmount';
+import {
+  fetchCartItems,
+  deleteItem,
+  addItem,
+  updateItem,
+} from '../../api/cartApi';
+import { showSuccess } from '../../utils';
 import styles from './styles.module.css';
-
-const initialState = [
-  {
-    id: '183756',
-    name: 'printer',
-    price: 110,
-    count: 2,
-    extendedGuarantee: false,
-  },
-  { id: '212345', name: 'RAM', price: 30, count: 0, extendedGuarantee: false },
-  {
-    id: '323522',
-    name: 'motherboard',
-    price: 150,
-    count: 1,
-    extendedGuarantee: true,
-  },
-  {
-    id: '434556',
-    name: 'mouse',
-    price: 15,
-    count: 4,
-    extendedGuarantee: false,
-  },
-];
 
 const Cart = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [items, setItems] = useState([]);
+  const [error, setError] = useState('');
 
   // +1, -1
-  const handleChangeCount = (id, step) =>
+  const handleChangeCount = (id, step) => {
     setItems((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              count: item.count + step >= 0 ? item.count + step : item.count,
-            }
-          : item
-      )
+      prev.map((item) => {
+        if (item.id === id) {
+          const updatedItem = {
+            ...item,
+            count: item.count + step >= 0 ? item.count + step : item.count,
+          };
+
+          updateItem(id, { count: updatedItem.count }).then(() => {
+            showSuccess('🦄 Wow so easy!');
+          });
+
+          return updatedItem;
+        } else {
+          return item;
+        }
+      })
     );
+  };
 
-  const handleRemoveItem = (id) =>
-    setItems((prev) => prev.filter((item) => item.id !== id));
+  const handleRemoveItem = (id) => {
+    setIsLoading(true);
 
-  const handleAddItem = (newItem) => setItems((prev) => [...prev, newItem]);
+    deleteItem(id)
+      .then(() => {
+        setItems((prev) => prev.filter((item) => item.id !== id));
+      })
+      .catch(({ message }) => setError(message))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const handleAddItem = (newItem) => {
+    setIsLoading(true);
+
+    addItem(newItem)
+      .then((data) => {
+        setItems((prev) => [...prev, data]);
+      })
+      .catch(({ message }) => setError(message))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   useEffect(() => {
-    // console.log('Cart: componentDidMount');
-    // console.log('fetch...');
-    // setIsLoading(true);
-    // setTimeout(() => {
-    //   setItems(initialState);
-    //   setIsLoading(false);
-    // }, 2000);
-    try {
-      setItems(JSON.parse(localStorage.getItem('cart')));
-    } catch (error) {
-      console.log(error.message);
-    }
+    setIsLoading(true);
+
+    fetchCartItems()
+      .then(setItems)
+      .catch(({ message }) => setError(message))
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []); // componentDidMount
 
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(items));
-  }, [items]);
-
   // useEffect(() => {
-  //   console.log('is loading', isLoading);
-  // }, [isLoading]);
+  // localStorage.setItem('cart', JSON.stringify(items));
+  // updateItem();
+  // }, [items]);
 
   return (
     <div className={styles.cart}>
       <CartInputForm onSubmit={handleAddItem} />
 
       {isLoading && <Loader />}
+
+      {error && <p>{error}</p>}
 
       <CartItemList
         items={items}
