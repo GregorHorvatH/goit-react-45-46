@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import Button from '../Button';
+import useToggle from '../../hooks/useToggle';
 import style from './style.module.scss';
 
 const CartInputForm = ({ onSubmit }) => {
-  // const formRef = useRef();
+  const { visible, toggle } = useToggle();
+
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
   const [extendedGuarantee, setExtendedGuarantee] = useState(false);
@@ -31,28 +33,32 @@ const CartInputForm = ({ onSubmit }) => {
 
   return (
     <div className={style.cartInputForm}>
-      <form className={style.form} onSubmit={handleSubmit}>
-        <label className={style.label}>
-          <span>name</span>
-          <input type='text' value={name} onChange={handleNameChange} />
-        </label>
+      <button onClick={toggle}>Show/hide</button>
 
-        <label className={style.label}>
-          <span>price</span>
-          <input type='number' value={price} onChange={handlePriceChange} />
-        </label>
+      {visible && (
+        <form className={style.form} onSubmit={handleSubmit}>
+          <label className={style.label}>
+            <span>name</span>
+            <input type='text' value={name} onChange={handleNameChange} />
+          </label>
 
-        <label className={style.label}>
-          <span>extended guarantee</span>
-          <input
-            type='checkbox'
-            checked={extendedGuarantee}
-            onChange={handleEGChange}
-          />
-        </label>
+          <label className={style.label}>
+            <span>price</span>
+            <input type='number' value={price} onChange={handlePriceChange} />
+          </label>
 
-        <Button type='submit'>+ add</Button>
-      </form>
+          <label className={style.label}>
+            <span>extended guarantee</span>
+            <input
+              type='checkbox'
+              checked={extendedGuarantee}
+              onChange={handleEGChange}
+            />
+          </label>
+
+          <Button type='submit'>+ add</Button>
+        </form>
+      )}
     </div>
   );
 };

@@ -2,17 +2,25 @@ import propTypes from 'prop-types';
 
 import CartItem from '../CartItem';
 import ErrorBoundary from '../ErrorBoundary';
+import useToggle from '../../hooks/useToggle';
 import styles from './style.module.css';
 
-const CartItemList = ({ items, ...rest }) => (
-  <div className={styles.cartItemList}>
-    {items.map((item) => (
-      <ErrorBoundary key={item.id}>
-        <CartItem item={item} {...rest} />
-      </ErrorBoundary>
-    ))}
-  </div>
-);
+const CartItemList = ({ items, ...rest }) => {
+  const { visible, toggle } = useToggle();
+
+  return (
+    <div className={styles.cartItemList}>
+      <button onClick={toggle}>Show/hide</button>
+
+      {visible &&
+        items.map((item) => (
+          <ErrorBoundary key={item.id}>
+            <CartItem item={item} {...rest} />
+          </ErrorBoundary>
+        ))}
+    </div>
+  );
+};
 
 CartItemList.propTypes = {
   items: propTypes.arrayOf(

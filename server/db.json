@@ -4,25 +4,25 @@
       "id": "323522",
       "name": "motherboard",
       "price": 150,
-      "count": 5,
+      "count": 1,
       "extendedGuarantee": true
     },
     {
       "id": "434556",
       "name": "mouse",
       "price": 15,
-      "count": 8,
+      "count": 1,
       "extendedGuarantee": false
     },
     {
       "name": "CPU",
       "price": 200,
-      "count": 3,
+      "count": 7,
       "extendedGuarantee": false,
       "id": "E6y7-sv"
     },
     {
-      "count": 2,
+      "count": 11,
       "name": "dfbdgs",
       "price": 123,
       "extendedGuarantee": true,

@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import CounterBody from './CounterBody';
+import CounterStepSelector from './CounterStepSelector';
 
 const Counter = () => {
   const [value, setValue] = useState(0);
@@ -7,34 +9,22 @@ const Counter = () => {
   const decrement = () => setValue((prev) => prev - step);
   const increment = () => setValue((prev) => prev + step);
 
-  const handleStepChange = (e) => {
-    setStep(Number(e.target.value));
-  };
+  const handleStepChange = useCallback(
+    (e) => setStep(Number(e.target.value)),
+    []
+  );
 
   return (
     <div className='counter'>
-      <CounterBody value={value} decrement={decrement} increment={increment} />
+      <CounterBody
+        value={value}
+        onDecrement={decrement}
+        onIncrement={increment}
+      />
 
-      <select value={step} onChange={handleStepChange}>
-        <option value='1'>1</option>
-        <option value='5'>5</option>
-        <option value='10'>10</option>
-        <option value='25'>25</option>
-        <option value='50'>50</option>
-        <option value='100'>100</option>
-      </select>
+      <CounterStepSelector step={step} onStepChange={handleStepChange} />
     </div>
   );
 };
-
-const CounterBody = ({ value, decrement, increment }) => (
-  <>
-    <button onClick={decrement}>-</button>
-    <CounterValue value={value} />
-    <button onClick={increment}>+</button>
-  </>
-);
-
-const CounterValue = ({ value }) => <span>{value}</span>;
 
 export default Counter;

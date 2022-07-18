@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { createUseStyles } from 'react-jss';
 import { CloseButton } from '../Button';
@@ -81,4 +81,4 @@ CartItem.propTypes = {
   // onIncrement: PropTypes.func.isRequired,
 };
 
-export default CartItem;
+export default memo(CartItem);
