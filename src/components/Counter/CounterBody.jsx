@@ -1,7 +1,13 @@
-import { memo } from 'react';
+import { useContext } from 'react';
+import CounterContext from './counterContext';
+import { increment, decrement } from './actions';
 
-const CounterBody = ({ value, onIncrement, onDecrement }) => {
-  console.log('render counter body');
+const CounterBody = () => {
+  const { state, dispatch } = useContext(CounterContext);
+  const { value } = state;
+
+  const onDecrement = () => dispatch(increment());
+  const onIncrement = () => dispatch(decrement());
 
   return (
     <>
@@ -12,7 +18,4 @@ const CounterBody = ({ value, onIncrement, onDecrement }) => {
   );
 };
 
-// isEqual
-export default memo(CounterBody, (prevProps, nextProps) => {
-  return prevProps.value === nextProps.value;
-});
+export default CounterBody;

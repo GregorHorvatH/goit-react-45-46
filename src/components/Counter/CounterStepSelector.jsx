@@ -1,10 +1,15 @@
-import { memo } from 'react';
+import { memo, forwardRef, useContext } from 'react';
+import CounterContext from './counterContext';
+import { setStep } from './actions';
 
-const CounterStepSelector = ({ step, onStepChange }) => {
-  console.log('render step selector');
+const CounterStepSelector = (props, ref) => {
+  const { state, dispatch } = useContext(CounterContext);
+  const { step } = state;
+
+  const onStepChange = (e) => dispatch(setStep(Number(e.target.value)));
 
   return (
-    <select value={step} onChange={onStepChange}>
+    <select value={step} onChange={onStepChange} ref={ref}>
       <option value='1'>1</option>
       <option value='5'>5</option>
       <option value='10'>10</option>
@@ -15,4 +20,6 @@ const CounterStepSelector = ({ step, onStepChange }) => {
   );
 };
 
-export default memo(CounterStepSelector);
+export const CounterStepSelectorMemoised = memo(
+  forwardRef(CounterStepSelector)
+);

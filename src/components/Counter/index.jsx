@@ -1,29 +1,29 @@
-import { useState, useCallback } from 'react';
+import { useEffect, useRef, useReducer } from 'react';
 import CounterBody from './CounterBody';
-import CounterStepSelector from './CounterStepSelector';
+import { CounterStepSelectorMemoised } from './CounterStepSelector';
+import CounterContext from './counterContext';
+import reducer from './reducer';
+
+const initialState = {
+  value: 1,
+  step: 1,
+};
 
 const Counter = () => {
-  const [value, setValue] = useState(0);
-  const [step, setStep] = useState(1);
+  const selectRef = useRef();
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  const decrement = () => setValue((prev) => prev - step);
-  const increment = () => setValue((prev) => prev + step);
-
-  const handleStepChange = useCallback(
-    (e) => setStep(Number(e.target.value)),
-    []
-  );
+  useEffect(() => {
+    selectRef.current.focus();
+  }, []);
 
   return (
-    <div className='counter'>
-      <CounterBody
-        value={value}
-        onDecrement={decrement}
-        onIncrement={increment}
-      />
-
-      <CounterStepSelector step={step} onStepChange={handleStepChange} />
-    </div>
+    <CounterContext.Provider value={{ state, dispatch }}>
+      <div className='counter'>
+        <CounterBody />
+        <CounterStepSelectorMemoised ref={selectRef} />
+      </div>
+    </CounterContext.Provider>
   );
 };
 
