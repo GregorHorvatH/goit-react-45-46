@@ -6,8 +6,8 @@ const CounterBody = () => {
   const { state, dispatch } = useContext(CounterContext);
   const { value } = state;
 
-  const onDecrement = () => dispatch(increment());
-  const onIncrement = () => dispatch(decrement());
+  const onDecrement = () => dispatch(decrement());
+  const onIncrement = () => dispatch(increment());
 
   return (
     <>

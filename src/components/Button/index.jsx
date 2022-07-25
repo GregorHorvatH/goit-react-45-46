@@ -1,11 +1,66 @@
 import styled from 'styled-components';
 
 const Button = styled.button`
-  background-color: ${(props) => (props.close ? '#cba7db' : '#b7fdc177d')};
+  background-color: ${({ type }) => {
+    switch (type) {
+      case 'danger':
+      case 'close':
+        return '#dc3545';
+
+      case 'success':
+        return '#28a745';
+
+      case 'link':
+        return '#ffffff';
+
+      default:
+        return '#f8f9fa';
+    }
+  }};
+
+  color: ${({ type }) => {
+    switch (type) {
+      case 'link':
+        return '#007bff';
+
+      default:
+        return '#000000';
+    }
+  }};
+
   border: none;
-  color: ${(props) => (props.close ? 'white' : 'black')};
   border-radius: 5px;
   padding: 0 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ type }) => {
+      switch (type) {
+        case 'danger':
+        case 'close':
+          return '#c82333';
+
+        case 'success':
+          return '#218838';
+
+        case 'link':
+          return '#ffffff';
+
+        default:
+          return '#e2e6ea';
+      }
+    }};
+
+    text-decoration: ${({ type }) => {
+      switch (type) {
+        case 'link':
+          return 'underline';
+
+        default:
+          return 'none';
+      }
+    }};
+  }
 `;
 
 export const NormalButton = ({ onClick }) => (
