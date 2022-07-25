@@ -11,3 +11,5 @@ toast.options = {
 };
 
 export const showSuccess = (message) => toast.success(message);
+
+export const sum = (a, b) => a + b;

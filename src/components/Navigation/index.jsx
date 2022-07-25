@@ -1,21 +1,13 @@
+import { NavLink } from 'react-router-dom';
 import styles from './styles.module.css';
-
-const Link = ({ to, children }) => {
-  const { pathname } = window.location;
-
-  return (
-    <a href={to} className={pathname === to ? styles.active : ''}>
-      {children}
-    </a>
-  );
-};
+import './linkstyles.css';
 
 const Navigation = () => (
   <nav className={styles.navigation}>
-    <Link to='/'>Home</Link>
-    <Link to='/cart'>Cart</Link>
-    <Link to='/counter'>Counter</Link>
-    <Link to='/about'>About</Link>
+    <NavLink to='/'>Home</NavLink>
+    <NavLink to='/cart'>Cart</NavLink>
+    <NavLink to='/counter'>Counter</NavLink>
+    <NavLink to='/about'>About</NavLink>
   </nav>
 );
 

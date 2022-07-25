@@ -9,7 +9,7 @@
   text-decoration: none;
 }
 
-a.active {
+.active {
   color: #0060c6;
   text-decoration: underline;
 }

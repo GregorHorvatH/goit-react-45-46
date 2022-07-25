@@ -1,3 +1,6 @@
+import TestComponent from './TestComponent';
+import { sum } from '../../utils';
+
 const Home = () => (
   <div className='container'>
     <h3>Home Page</h3>
@@ -6,6 +9,9 @@ const Home = () => (
       voluptatem ipsa tempora culpa facere explicabo, optio aliquid eos incidunt
       fugiat molestiae beatae aperiam numquam. Consectetur, eveniet velit.
     </p>
+    <p>sum: {sum(2, 2)}</p>
+
+    <TestComponent />
   </div>
 );
 
