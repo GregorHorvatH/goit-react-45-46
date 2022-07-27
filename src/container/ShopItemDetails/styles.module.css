@@ -1,0 +1,18 @@
+.shopItemDetails {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 0 10px;
+  color: gray;
+}
+
+.shopItemDetails img {
+  width: 50%;
+}
+
+.shopItemDetails h4,
+.shopItemDetails h3,
+.shopItemDetails h2 {
+  padding: 0;
+  margin: 0;
+}

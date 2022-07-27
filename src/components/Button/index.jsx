@@ -20,6 +20,9 @@ const Button = styled.button`
 
   color: ${({ type }) => {
     switch (type) {
+      case 'success':
+        return '#ffffff';
+
       case 'link':
         return '#007bff';
 
@@ -48,6 +51,35 @@ const Button = styled.button`
 
         default:
           return '#e2e6ea';
+      }
+    }};
+
+    text-decoration: ${({ type }) => {
+      switch (type) {
+        case 'link':
+          return 'underline';
+
+        default:
+          return 'none';
+      }
+    }};
+  }
+
+  &:active {
+    background-color: ${({ type }) => {
+      switch (type) {
+        case 'danger':
+        case 'close':
+          return '#ad1f2d';
+
+        case 'success':
+          return '#1b712e';
+
+        case 'link':
+          return '#e2e2e2';
+
+        default:
+          return '#c8cbcf';
       }
     }};
 

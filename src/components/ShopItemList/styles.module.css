@@ -1,0 +1,9 @@
+.shopItemList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 10px;
+  justify-content: center;
+  color: #6c757d;
+}

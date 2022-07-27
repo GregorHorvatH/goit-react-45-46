@@ -1,0 +1,38 @@
+.shopItem {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e2e2e2;
+  padding: 10px;
+  border-radius: 3px;
+  row-gap: 10px;
+  cursor: pointer;
+}
+
+.shopItem:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.image {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.name {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  height: 35px;
+  border-top: 1px solid #28a745;
+  border-radius: 5px;
+}
+
+.price {
+  font-size: 1.3em;
+  align-self: center;
+}

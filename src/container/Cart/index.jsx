@@ -2,19 +2,16 @@ import CartInputForm from '../../components/CartInputForm';
 import Loader from '../../components/Loader';
 import CartItemList from '../../components/CartItemList';
 import TotalAmount from '../../components/TotalAmount';
-import useCartData from '../../hooks/useCartData';
 import styles from './styles.module.css';
 
-const Cart = () => {
-  const {
-    isLoading,
-    items,
-    error,
-    handleChangeCount,
-    handleRemoveItem,
-    handleAddItem,
-  } = useCartData();
-
+const Cart = ({
+  isLoading,
+  items,
+  error,
+  handleChangeCount,
+  handleRemoveItem,
+  handleAddItem,
+}) => {
   return (
     <div className={styles.cart}>
       <CartInputForm onSubmit={handleAddItem} />

@@ -5,6 +5,7 @@ import './linkstyles.css';
 const Navigation = () => (
   <nav className={styles.navigation}>
     <NavLink to='/'>Home</NavLink>
+    <NavLink to='/shop'>Shop</NavLink>
     <NavLink to='/cart'>Cart</NavLink>
     <NavLink to='/counter'>Counter</NavLink>
     <NavLink to='/about'>About</NavLink>
