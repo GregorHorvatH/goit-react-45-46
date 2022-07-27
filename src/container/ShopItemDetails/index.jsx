@@ -1,16 +1,27 @@
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import styles from './styles.module.css';
 
 const ShopItemDetails = ({ items }) => {
+  const [item, setItem] = useState();
   const { itemId } = useParams();
-
-  // TODO: write code here
-  const item = undefined;
+  const navigate = useNavigate();
+  const {
+    state: { filter },
+  } = useLocation();
 
   const handleGoBack = () => {
-    // TODO: write code here
-    console.log('go back to shop');
+    if (filter) {
+      navigate(`/shop?filter=${filter}`);
+    } else {
+      navigate('/shop');
+    }
   };
+
+  useEffect(() => {
+    // fetch...
+    setItem(items.find(({ id }) => id === itemId));
+  }, [items, itemId]);
 
   return item ? (
     <div className={styles.shopItemDetails}>

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import styles from './styles.module.css';
 
 const ShopFilter = ({ onChange }) => {
-  const [value, setValue] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [value, setValue] = useState(searchParams.get('filter') || '');
 
   const handleChangeInput = (e) => {
     setValue(e.target.value);
@@ -10,10 +12,8 @@ const ShopFilter = ({ onChange }) => {
 
   useEffect(() => {
     onChange(value.toLowerCase());
-
-    // TODO: write code here
-    console.log('filter:', value);
-  }, [onChange, value]);
+    setSearchParams({ filter: value });
+  }, [onChange, value, setSearchParams]);
 
   return (
     <label className={styles.filter}>
