@@ -3,9 +3,12 @@ import styles from './styles.module.css';
 
 const ShopItemDetails = ({ items }) => {
   const { itemId } = useParams();
-  const item = items.find(({ id }) => id === itemId);
+
+  // TODO: write code here
+  const item = undefined;
 
   const handleGoBack = () => {
+    // TODO: write code here
     console.log('go back to shop');
   };
 

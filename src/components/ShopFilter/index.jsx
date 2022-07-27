@@ -10,6 +10,8 @@ const ShopFilter = ({ onChange }) => {
 
   useEffect(() => {
     onChange(value.toLowerCase());
+
+    // TODO: write code here
     console.log('filter:', value);
   }, [onChange, value]);
 

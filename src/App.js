@@ -23,6 +23,7 @@ const App = () => {
   };
 
   const handleViewShopItem = (itemId) => {
+    // TODO: write code here
     console.log('view item details:', itemId);
   };
 
