@@ -1,4 +1,5 @@
-import TestComponent from './TestComponent';
+// import TestComponent from './TestComponent';
+import TestComponent from '../../components/TestComponent';
 import { sum } from '../../utils';
 
 const Home = () => (

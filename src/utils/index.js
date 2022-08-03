@@ -12,4 +12,8 @@ toast.options = {
 
 export const showSuccess = (message) => toast.success(message);
 
-export const sum = (a, b) => a + b;
+export const sum = (a = 0, b = 0) => a + b;
+
+export const min = (arr) => (arr?.length ? Math.min(...arr) : undefined);
+
+export const max = (arr) => (arr?.length ? Math.max(...arr) : undefined);
