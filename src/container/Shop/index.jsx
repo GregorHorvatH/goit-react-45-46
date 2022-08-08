@@ -7,6 +7,11 @@ const Shop = ({ items, filter, onFilter, ...props }) => {
     ? items.filter(({ name }) => name.toLowerCase().includes(filter))
     : items;
 
+  // useEffect(() => {
+  //   // fetch().catch.apply.
+  //   // dispatch
+  // }, []);
+
   return (
     <div className={styles.shop}>
       <h3>My Awesome Shop</h3>

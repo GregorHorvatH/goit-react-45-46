@@ -80,7 +80,7 @@ const useCartData = (defaultIsLoading = false) => {
   };
 
   useEffect(() => {
-    loadData();
+    // loadData();
   }, []); // componentDidMount
 
   return {

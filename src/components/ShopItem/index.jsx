@@ -1,14 +1,32 @@
+import { useDispatch } from 'react-redux';
 import Button from '../Button';
+import { addCartItem } from '../../store/actions';
 import styles from './styles.module.css';
 
 const ShopItem = ({ item, onAdd, onView }) => {
+  const dispatch = useDispatch();
+
   const handleItemCLick = () => {
     onView(item.id);
   };
 
+  // const handleAddToCartClick = (e) => {
+  //   e.stopPropagation();
+  //   onAdd(item.id);
+  // };
+
   const handleAddToCartClick = (e) => {
     e.stopPropagation();
-    onAdd(item.id);
+
+    dispatch(
+      addCartItem({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        count: 1,
+        extendedGuarantee: false,
+      })
+    );
   };
 
   return (
