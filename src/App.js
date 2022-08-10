@@ -3,8 +3,8 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Navigation from './components/Navigation';
 
-import useShopData from './hooks/useShopData';
-import useCartData from './hooks/useCartData';
+// import useShopData from './hooks/useShopData';
+// import useCartData from './hooks/useCartData';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -28,43 +28,28 @@ const About = lazy(() =>
 );
 
 const App = () => {
-  const [filter, setFilter] = useState('');
-  const [items] = useShopData();
-  const cartData = useCartData();
-  const navigate = useNavigate();
+  // const [filter, setFilter] = useState('');
+  // const [items] = useShopData();
+  // const navigate = useNavigate();
 
-  const handleAddItemToCart = (itemId) => {
-    console.log('add to cart:', itemId);
-  };
+  // const handleAddItemToCart = (itemId) => {
+  //   console.log('add to cart:', itemId);
+  // };
 
-  const handleViewShopItem = (itemId) => {
-    navigate(`/shop/${itemId}`, { state: { filter } });
-  };
+  // const handleViewShopItem = (itemId) => {
+  //   navigate(`/shop/${itemId}`, { state: { filter } });
+  // };
 
   return (
     <div className='App'>
       <Navigation />
 
-      <Suspense fallback={<p>lodaing...</p>}>
+      <Suspense fallback={<p>loading...</p>}>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route
-            path='/shop'
-            element={
-              <Shop
-                items={items}
-                onAdd={handleAddItemToCart}
-                onView={handleViewShopItem}
-                filter={filter}
-                onFilter={setFilter}
-              />
-            }
-          />
-          <Route
-            path='/shop/:itemId'
-            element={<ShopItemDetails items={items} />}
-          />
-          <Route path='/cart' element={<Cart {...cartData} />} />
+          <Route path='/shop' element={<Shop />} />
+          <Route path='/shop/:itemId' element={<ShopItemDetails />} />
+          <Route path='/cart' element={<Cart />} />
           <Route path='/counter' element={<Counter />} />
           <Route path='/about' element={<About />} />
         </Routes>

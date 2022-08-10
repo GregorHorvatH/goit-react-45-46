@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styles from './styles.module.css';
 
-const ShopItemDetails = ({ items }) => {
+const ShopItemDetails = () => {
+  const navigate = useNavigate();
+  const items = useSelector((state) => state.shop.items);
+  const filter = useSelector((state) => state.filter.value);
+
   const [item, setItem] = useState();
   const { itemId } = useParams();
-  const navigate = useNavigate();
-  const {
-    state: { filter },
-  } = useLocation();
 
   const handleGoBack = () => {
     if (filter) {

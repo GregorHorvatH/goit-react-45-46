@@ -1,7 +1,9 @@
 import { memo } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createUseStyles } from 'react-jss';
 import { CloseButton } from '../Button';
+import { setCount, removeItem } from '../../redux/cart';
 
 const useStyles = createUseStyles({
   cartItem: {
@@ -37,13 +39,14 @@ const useStyles = createUseStyles({
   },
 });
 
-const CartItem = ({ item, onRemoveItem, onChangeCount }) => {
+const CartItem = ({ item }) => {
+  const dispatch = useDispatch();
   const styles = useStyles({ item });
   const amount = item.count * item.price;
 
-  const decrement = () => onChangeCount(item.id, -1);
-  const increment = () => onChangeCount(item.id, 1);
-  const remove = () => onRemoveItem(item.id);
+  const decrement = () => dispatch(setCount({ id: item.id, step: -1 }));
+  const increment = () => dispatch(setCount({ id: item.id, step: 1 }));
+  const remove = () => dispatch(removeItem(item.id));
 
   console.log('render item:', item.id);
 
@@ -75,8 +78,8 @@ CartItem.propTypes = {
     price: PropTypes.number.isRequired,
     count: PropTypes.number.isRequired,
   }),
-  onRemoveItem: PropTypes.func.isRequired,
-  onChangeCount: PropTypes.func.isRequired,
+  // onRemoveItem: PropTypes.func.isRequired,
+  // onChangeCount: PropTypes.func.isRequired,
   // onDecrement: PropTypes.func.isRequired,
   // onIncrement: PropTypes.func.isRequired,
 };

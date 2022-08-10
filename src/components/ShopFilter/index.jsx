@@ -1,19 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
+import { setFilter } from '../../redux/filter';
 import styles from './styles.module.css';
 
-const ShopFilter = ({ onChange }) => {
+const ShopFilter = () => {
+  const dispatch = useDispatch();
+  const value = useSelector((state) => state.filter.value);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [value, setValue] = useState(searchParams.get('filter') || '');
 
   const handleChangeInput = (e) => {
-    setValue(e.target.value);
+    dispatch(setFilter(e.target.value));
   };
 
   useEffect(() => {
-    onChange(value.toLowerCase());
     setSearchParams({ filter: value });
-  }, [onChange, value, setSearchParams]);
+  }, [value, setSearchParams]);
 
   return (
     <label className={styles.filter}>

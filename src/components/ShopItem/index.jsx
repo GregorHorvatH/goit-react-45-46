@@ -1,14 +1,28 @@
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Button from '../Button';
+import { addItem } from '../../redux/cart';
 import styles from './styles.module.css';
 
-const ShopItem = ({ item, onAdd, onView }) => {
+const ShopItem = ({ item }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleItemCLick = () => {
-    onView(item.id);
+    navigate(`/shop/${item.id}`);
   };
 
   const handleAddToCartClick = (e) => {
     e.stopPropagation();
-    onAdd(item.id);
+    dispatch(
+      addItem({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        count: 1,
+        extendedGuarantee: false,
+      })
+    );
   };
 
   return (
