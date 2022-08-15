@@ -5,14 +5,14 @@ import reducer from './reducer';
 
 const loggerMiddleware = (store) => (next) => (action) => {
   // your code
-  console.log(action);
+  // console.log(action);
 
   next(action);
 };
 
 const secondMiddleware = (store) => (next) => (action) => {
   // your code
-  console.log('second middleware:', action.type);
+  // console.log('second middleware:', action.type);
 
   next(action);
 };
