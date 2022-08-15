@@ -8,18 +8,9 @@ const ShopFilter = () => {
   const dispatch = useDispatch();
   const value = useSelector((state) => state.filter.value);
 
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const [value, setValue] = useState(searchParams.get('filter') || '');
-
   const handleChangeInput = (e) => {
-    // setValue(e.target.value);
     dispatch(setFilter(e.target.value));
   };
-
-  // useEffect(() => {
-  // onChange(value.toLowerCase());
-  // setSearchParams({ filter: filterValue });
-  // }, [onChange, filterValue, setSearchParams]);
 
   return (
     <label className={styles.filter}>

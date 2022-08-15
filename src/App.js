@@ -29,7 +29,6 @@ const About = lazy(() =>
 
 const App = () => {
   const [filter, setFilter] = useState('');
-  const [items] = useShopData();
   const cartData = useCartData();
   const navigate = useNavigate();
 
@@ -52,7 +51,6 @@ const App = () => {
             path='/shop'
             element={
               <Shop
-                items={items}
                 onAdd={handleAddItemToCart}
                 onView={handleViewShopItem}
                 filter={filter}
@@ -60,10 +58,7 @@ const App = () => {
               />
             }
           />
-          <Route
-            path='/shop/:itemId'
-            element={<ShopItemDetails items={items} />}
-          />
+          <Route path='/shop/:itemId' element={<ShopItemDetails />} />
           <Route path='/cart' element={<Cart {...cartData} />} />
           <Route path='/counter' element={<Counter />} />
           <Route path='/about' element={<About />} />

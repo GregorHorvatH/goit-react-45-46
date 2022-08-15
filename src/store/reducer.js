@@ -2,43 +2,45 @@ import types from './types';
 
 const initialState = {
   shop: {
+    error: '',
+    isLoading: false,
     items: [
-      {
-        id: '1',
-        name: 'Retro TV',
-        price: 620.87,
-        img: 'https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg',
-      },
-      {
-        id: '2',
-        name: 'Photo Camera',
-        price: 599.99,
-        img: 'https://images.pexels.com/photos/51383/photo-camera-subject-photographer-51383.jpeg',
-      },
-      {
-        id: '3',
-        name: 'Noname Phone',
-        price: 300.27,
-        img: 'https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg',
-      },
-      {
-        id: '4',
-        name: 'Tennis Ball',
-        price: 9.99,
-        img: 'https://images.pexels.com/photos/47813/baseball-softball-clay-ball-47813.jpeg',
-      },
-      {
-        id: '5',
-        name: 'White Bicycle',
-        price: 499.99,
-        img: 'https://images.pexels.com/photos/255934/pexels-photo-255934.jpeg',
-      },
-      {
-        id: '6',
-        name: 'Books Collection',
-        price: 99.99,
-        img: 'https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg',
-      },
+      // {
+      //   id: '1',
+      //   name: 'Retro TV',
+      //   price: 620.87,
+      //   img: 'https://images.pexels.com/photos/333984/pexels-photo-333984.jpeg',
+      // },
+      // {
+      //   id: '2',
+      //   name: 'Photo Camera',
+      //   price: 599.99,
+      //   img: 'https://images.pexels.com/photos/51383/photo-camera-subject-photographer-51383.jpeg',
+      // },
+      // {
+      //   id: '3',
+      //   name: 'Noname Phone',
+      //   price: 300.27,
+      //   img: 'https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg',
+      // },
+      // {
+      //   id: '4',
+      //   name: 'Tennis Ball',
+      //   price: 9.99,
+      //   img: 'https://images.pexels.com/photos/47813/baseball-softball-clay-ball-47813.jpeg',
+      // },
+      // {
+      //   id: '5',
+      //   name: 'White Bicycle',
+      //   price: 499.99,
+      //   img: 'https://images.pexels.com/photos/255934/pexels-photo-255934.jpeg',
+      // },
+      // {
+      //   id: '6',
+      //   name: 'Books Collection',
+      //   price: 99.99,
+      //   img: 'https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg',
+      // },
     ],
   },
   cart: {
@@ -74,12 +76,42 @@ const initialState = {
     ],
   },
   filter: {
-    value: 'test filter',
+    value: '',
   },
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.FETCH_ITEMS_REQUEST:
+      return {
+        ...state,
+        shop: {
+          ...state.shop,
+          isLoading: true,
+          error: '',
+        },
+      };
+
+    case types.FETCH_ITEMS_SUCCESS:
+      return {
+        ...state,
+        shop: {
+          ...state.shop,
+          isLoading: false,
+          items: action.payload,
+        },
+      };
+
+    case types.FETCH_ITEMS_FAILURE:
+      return {
+        ...state,
+        shop: {
+          ...state.shop,
+          isLoading: false,
+          error: action.payload,
+        },
+      };
+
     case types.SET_FILTER:
       return {
         ...state,
