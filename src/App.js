@@ -1,5 +1,5 @@
-import { lazy, Suspense, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Navigation from './components/Navigation';
 
@@ -28,18 +28,6 @@ const About = lazy(() =>
 );
 
 const App = () => {
-  // const [filter, setFilter] = useState('');
-  // const [items] = useShopData();
-  // const navigate = useNavigate();
-
-  // const handleAddItemToCart = (itemId) => {
-  //   console.log('add to cart:', itemId);
-  // };
-
-  // const handleViewShopItem = (itemId) => {
-  //   navigate(`/shop/${itemId}`, { state: { filter } });
-  // };
-
   return (
     <div className='App'>
       <Navigation />
