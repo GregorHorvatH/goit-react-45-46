@@ -42,7 +42,7 @@ const getTeamBudget = (team = [], salaries = {}) =>
   team.reduce((acc, { specialization = '' } = {}) => {
     const key = `totalBudget${specialization}`;
     const { salary = 0, tax = 0 } = salaries[specialization] || {};
-    const salaryWithTax = salary + parseInt(tax.replace('%', '')) / 100;
+    const salaryWithTax = salary + parseFloat(tax) / 100;
 
     return {
       ...acc,
