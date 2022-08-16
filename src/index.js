@@ -38,18 +38,16 @@ const team1 = [
   { name: 'Dan', specialization: 'Manager' },
 ];
 
-const getTeamBudget = (team, salaries) =>
-  team.reduce((acc, { specialization }) => {
+const getTeamBudget = (team = [], salaries = {}) =>
+  team.reduce((acc, { specialization = '' } = {}) => {
     const key = `totalBudget${specialization}`;
     const { salary = 0, tax = 0 } = salaries[specialization] || {};
-    const percents = salary * (parseInt(tax.replace('%', '')) / 100);
-    const prevValue = key in acc ? acc[key] : 0;
-    const salaryWithTax = salary + percents;
+    const salaryWithTax = salary + parseInt(tax.replace('%', '')) / 100;
 
     return {
       ...acc,
+      [key]: (acc[key] || 0) + salaryWithTax,
       totalBudgetTeam: (acc.totalBudgetTeam || 0) + salaryWithTax,
-      [key]: prevValue + salaryWithTax,
     };
   }, {});
 
