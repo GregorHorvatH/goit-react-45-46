@@ -18,10 +18,10 @@ root.render(
 );
 
 // {
-//   "totalBudgetTeam": 4700,
+//   "totalBudgetTeam": 5485,
 //   "totalBudgetManager": 2200,
 //   "totalBudgetDesigner": 1560,
-//   "totalBudgetArtist": 1724
+//   "totalBudgetArtist": 1725
 // }
 // ----- exercise ------
 const salaries1 = {
@@ -38,23 +38,19 @@ const team1 = [
   { name: 'Dan', specialization: 'Manager' },
 ];
 
-const result = team1.reduce(
-  (acc, { specialization }) => {
+const getTeamBudget = (team, salaries) =>
+  team.reduce((acc, { specialization }) => {
     const key = `totalBudget${specialization}`;
-    const { salary, tax } = salaries1[specialization];
-    const taxNum = parseInt(tax.replace('%', '')) / 100;
-    const value = key in acc ? acc[key] : 0;
-    const salaryWithTax = salary + salary * taxNum;
+    const { salary = 0, tax = 0 } = salaries[specialization] || {};
+    const percents = salary * (parseInt(tax.replace('%', '')) / 100);
+    const prevValue = key in acc ? acc[key] : 0;
+    const salaryWithTax = salary + percents;
 
     return {
       ...acc,
-      totalBudgetTeam: acc.totalBudgetTeam + salaryWithTax,
-      [key]: value + salaryWithTax,
+      totalBudgetTeam: (acc.totalBudgetTeam || 0) + salaryWithTax,
+      [key]: prevValue + salaryWithTax,
     };
-  },
-  {
-    totalBudgetTeam: 0,
-  }
-);
+  }, {});
 
-console.log('result:', result);
+console.log(getTeamBudget(team1, salaries1));
