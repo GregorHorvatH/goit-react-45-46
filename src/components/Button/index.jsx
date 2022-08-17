@@ -95,12 +95,14 @@ const Button = styled.button`
   }
 `;
 
-export const NormalButton = ({ onClick }) => (
-  <Button onClick={onClick}>x</Button>
+export const NormalButton = ({ disabled = false, onClick }) => (
+  <Button onClick={onClick} disabled={disabled}>
+    x
+  </Button>
 );
 
-export const CloseButton = ({ item = {}, onClick }) => (
-  <Button close isRed={item.count > 0} onClick={onClick}>
+export const CloseButton = ({ item = {}, disabled = false, onClick }) => (
+  <Button close isRed={item.count > 0} disabled={disabled} onClick={onClick}>
     x
   </Button>
 );
