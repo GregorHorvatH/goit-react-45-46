@@ -1,9 +1,11 @@
 import { memo } from 'react';
-import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { createUseStyles } from 'react-jss';
 import { CloseButton } from '../Button';
-import { setCount, removeItem } from '../../redux/cart';
+import {
+  useUpdateCartItemMutation,
+  useDeleteCartItemMutation,
+} from '../../redux/cartApi';
 
 const useStyles = createUseStyles({
   cartItem: {
@@ -40,15 +42,20 @@ const useStyles = createUseStyles({
 });
 
 const CartItem = ({ item }) => {
-  const dispatch = useDispatch();
   const styles = useStyles({ item });
   const amount = (item.count * item.price).toFixed(2);
 
-  const decrement = () => dispatch(setCount({ id: item.id, step: -1 }));
-  const increment = () => dispatch(setCount({ id: item.id, step: 1 }));
-  const remove = () => dispatch(removeItem(item.id));
+  const [updateItem, { isLoading: updateing }] = useUpdateCartItemMutation();
+  const [deleteItem, { isLoading: removing }] = useDeleteCartItemMutation();
+  const isLoading = updateing || removing;
 
-  console.log('render item:', item.id);
+  const decrement = () =>
+    updateItem({ id: item.id, payload: { count: item.count - 1 } });
+
+  const increment = () =>
+    updateItem({ id: item.id, payload: { count: item.count + 1 } });
+
+  const remove = () => deleteItem(item.id);
 
   return (
     <div className={styles.cartItem}>
@@ -58,9 +65,13 @@ const CartItem = ({ item }) => {
       </div>
 
       <div className={styles.counter}>
-        <button onClick={decrement}>-</button>
+        <button onClick={decrement} disabled={isLoading}>
+          -
+        </button>
         <span className={styles.value}>{item.count}</span>
-        <button onClick={increment}>+</button>
+        <button onClick={increment} disabled={isLoading}>
+          +
+        </button>
       </div>
 
       <span className={styles.amount}>

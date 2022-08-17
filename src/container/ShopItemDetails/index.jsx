@@ -1,17 +1,15 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useQuery } from '@tanstack/react-query';
+import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchItem } from '../../redux/shopApi';
+import { getShopItem } from '../../api/shopApi';
 import styles from './styles.module.css';
 
 const ShopItemDetails = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const items = useSelector((state) => state.shop.items);
+  const { itemId } = useParams();
   const filter = useSelector((state) => state.filter.value);
 
-  const [item, setItem] = useState();
-  const { itemId } = useParams();
+  const { data: item } = useQuery(['shop/item'], getShopItem(itemId));
 
   const handleGoBack = () => {
     if (filter) {
@@ -20,16 +18,6 @@ const ShopItemDetails = () => {
       navigate('/shop');
     }
   };
-
-  useEffect(() => {
-    setItem(items.find(({ id }) => id === itemId));
-  }, [items, itemId]);
-
-  useEffect(() => {
-    if (!items.length) {
-      dispatch(fetchItem(itemId));
-    }
-  }, [dispatch, items, itemId]);
 
   return item ? (
     <div className={styles.shopItemDetails}>

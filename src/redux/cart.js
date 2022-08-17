@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { cartApi } from './cartApi';
 
 const initialState = {
   items: [],
@@ -27,6 +28,14 @@ export const cartSlice = createSlice({
           : item;
       });
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      cartApi.endpoints.getCartItems.matchFulfilled,
+      (state, { payload }) => {
+        state.items = payload;
+      }
+    );
   },
 });
 

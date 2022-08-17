@@ -1,20 +1,16 @@
-import { useSelector } from 'react-redux';
 import CartInputForm from '../../components/CartInputForm';
 import Loader from '../../components/Loader';
 import CartItemList from '../../components/CartItemList';
 import TotalAmount from '../../components/TotalAmount';
 import useCartData from '../../hooks/useCartData';
+import { useGetCartItemsQuery } from '../../redux/cartApi';
 import styles from './styles.module.css';
 
 const Cart = () => {
-  const items = useSelector((state) => state.cart.items);
-  const {
-    isLoading,
-    error,
-    handleChangeCount,
-    handleRemoveItem,
-    handleAddItem,
-  } = useCartData();
+  const { handleChangeCount, handleRemoveItem, handleAddItem } = useCartData();
+  const { data: items = [], error, isLoading } = useGetCartItemsQuery();
+
+  if (isLoading) return <p>loading...</p>;
 
   return (
     <div className={styles.cart}>

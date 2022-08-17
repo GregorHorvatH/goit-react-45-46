@@ -1,21 +1,21 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useQuery } from '@tanstack/react-query';
 import ShopFilter from '../../components/ShopFilter';
 import ShopItemList from '../../components/ShopItemList';
-import { fetchItems } from '../../redux/shopApi';
+import { getShopItems } from '../../api/shopApi';
 import styles from './styles.module.css';
 
 const Shop = ({ onFilter = () => {} }) => {
-  const dispatch = useDispatch();
-  const { items, isLoading, error } = useSelector((state) => state.shop);
+  const {
+    data: items,
+    isLoading,
+    error,
+  } = useQuery(['shop/items'], getShopItems);
+
   const filter = useSelector((state) => state.filter.value);
   const filteredItems = filter
     ? items.filter(({ name }) => name.toLowerCase().includes(filter))
     : items;
-
-  useEffect(() => {
-    dispatch(fetchItems());
-  }, []);
 
   return (
     <div className={styles.shop}>

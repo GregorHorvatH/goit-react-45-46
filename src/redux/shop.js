@@ -48,8 +48,8 @@ export const shopSlice = createSlice({
   initialState,
   reducers: {
     fetchItemsRequest: (state) => {
-      state.isLoading = true;
       state.error = '';
+      state.isLoading = true;
     },
     fetchItemsSuccess: (state, action) => {
       state.items = action.payload;
@@ -61,8 +61,8 @@ export const shopSlice = createSlice({
     },
 
     fetchItemRequest: (state) => {
-      state.isLoading = true;
       state.error = '';
+      state.isLoading = true;
     },
     fetchItemSuccess: (state, action) => {
       state.items = [action.payload];
