@@ -1,10 +1,15 @@
 .cartInputForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
   padding: 10px;
   background-color: rgb(163, 207, 248);
   // background-color: tomato;
 
   .form {
     display: flex;
+    align-items: center;
+    column-gap: 10px;
 
     .label {
       display: flex;

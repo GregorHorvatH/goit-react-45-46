@@ -42,7 +42,7 @@ const useStyles = createUseStyles({
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
   const styles = useStyles({ item });
-  const amount = item.count * item.price;
+  const amount = (item.count * item.price).toFixed(2);
 
   const decrement = () => dispatch(setCount({ id: item.id, step: -1 }));
   const increment = () => dispatch(setCount({ id: item.id, step: 1 }));

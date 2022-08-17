@@ -10,7 +10,7 @@ const CartItemList = ({ items, ...rest }) => {
 
   return (
     <div className={styles.cartItemList}>
-      <button onClick={toggle}>Show/hide</button>
+      <button onClick={toggle}>Show/Hide</button>
 
       {visible &&
         items.map((item) => (

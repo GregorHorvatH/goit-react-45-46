@@ -18,7 +18,6 @@ const CartInputForm = ({ onSubmit }) => {
     e.preventDefault();
 
     onSubmit({
-      // id: Date.now().toString(),
       count: 1,
       name,
       price: Number(price),
@@ -28,12 +27,11 @@ const CartInputForm = ({ onSubmit }) => {
     setName('');
     setPrice(0);
     setExtendedGuarantee(false);
-    // formRef.current.reset();
   };
 
   return (
     <div className={style.cartInputForm}>
-      <button onClick={toggle}>Show/hide</button>
+      <button onClick={toggle}>Show/Hide</button>
 
       {visible && (
         <form className={style.form} onSubmit={handleSubmit}>

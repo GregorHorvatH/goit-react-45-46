@@ -10,7 +10,6 @@ const Cart = () => {
   const items = useSelector((state) => state.cart.items);
   const {
     isLoading,
-    // items,
     error,
     handleChangeCount,
     handleRemoveItem,
