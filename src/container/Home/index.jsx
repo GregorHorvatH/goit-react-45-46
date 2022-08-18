@@ -1,5 +1,6 @@
 import TestComponent from './TestComponent';
 import { sum } from '../../utils';
+import cat from '../../assets/cat.jpeg';
 
 const Home = () => (
   <div className='container'>
@@ -12,6 +13,8 @@ const Home = () => (
     <p>sum: {sum(2, 2)}</p>
 
     <TestComponent />
+
+    <img src={cat} alt='cat' />
   </div>
 );
 
