@@ -1,6 +1,7 @@
 import TestComponent from './TestComponent';
 import { sum } from '../../utils';
 import cat from '../../assets/cat.jpeg';
+import styles from './styles.module.css';
 
 const Home = () => (
   <div className='container'>
@@ -14,7 +15,7 @@ const Home = () => (
 
     <TestComponent />
 
-    <img src={cat} alt='cat' />
+    <img className={styles.img} src={cat} alt='cat' />
   </div>
 );
 

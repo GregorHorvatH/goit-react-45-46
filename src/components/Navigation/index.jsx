@@ -9,6 +9,8 @@ const Navigation = () => (
       <NavLink to='/cart'>Cart</NavLink>
       <NavLink to='/counter'>Counter</NavLink>
       <NavLink to='/about'>About</NavLink>
+      {/* <NavLink to='/login'>Login</NavLink> */}
+      {/* <NavLink to='/logout'>Logout</NavLink> */}
     </div>
   </nav>
 );

@@ -26,6 +26,12 @@ const ShopItemDetails = lazy(() =>
 const About = lazy(() =>
   import('./container/About' /* webpackChunkName: "about" */)
 );
+// const Login = lazy(() =>
+//   import('./container/Login' /* webpackChunkName: "login" */)
+// );
+// const Logout = lazy(() =>
+//   import('./container/Logout' /* webpackChunkName: "logout" */)
+// );
 
 const App = () => {
   return (
@@ -40,6 +46,8 @@ const App = () => {
           <Route path='/cart' element={<Cart />} />
           <Route path='/counter' element={<Counter />} />
           <Route path='/about' element={<About />} />
+          {/* <Route path='/login' element={<Login />} /> */}
+          {/* <Route path='/logout' element={<Logout />} /> */}
         </Routes>
       </Suspense>
 
