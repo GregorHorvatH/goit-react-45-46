@@ -1,20 +1,33 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useLoginMutation } from '../../redux/userApi';
+import { loginSuccess } from '../../redux/user';
+
 import styles from './styles.module.css';
 
 const Login = () => {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+  const dipatch = useDispatch();
+  const [email, setEmail] = useState('test.user.1@gmail.com');
+  const [password, setPassword] = useState('12345678');
+  const [login, status] = useLoginMutation();
+  const { isLoading } = status;
 
-  const handleChangeLogin = (e) => setLogin(e.target.value);
+  const handleChangeLogin = (e) => setEmail(e.target.value);
   const handleChangePassword = (e) => setPassword(e.target.value);
 
+  // console.log(status);
+
   const handleSubmit = (e) => {
-    const credentials = { login, password };
+    const credentials = { email, password };
 
     e.preventDefault();
 
     // TODO: fetch https://goit-phonebook-api.herokuapp.com/users/login
-    console.log(credentials);
+    // console.log(credentials);
+    login(credentials).then(({ data }) => {
+      dipatch(loginSuccess(data));
+      console.log(data);
+    });
   };
 
   return (
@@ -23,8 +36,8 @@ const Login = () => {
         <legend>Login</legend>
         <form className={styles.form} onSubmit={handleSubmit}>
           <label className={styles.field}>
-            <span>login</span>
-            <input type='text' value={login} onChange={handleChangeLogin} />
+            <span>email</span>
+            <input type='text' value={email} onChange={handleChangeLogin} />
           </label>
 
           <label className={styles.field}>
@@ -36,8 +49,11 @@ const Login = () => {
             />
           </label>
 
-          <button type='submit'>Login</button>
+          <button type='submit' disabled={isLoading}>
+            Login
+          </button>
         </form>
+        {/* <span>or create new user...</span> */}
       </fieldset>
     </div>
   );

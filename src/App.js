@@ -1,7 +1,8 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Navigation from './components/Navigation';
+import { useCurrentUserQuery } from './redux/userApi';
 
 // import useShopData from './hooks/useShopData';
 // import useCartData from './hooks/useCartData';
@@ -26,14 +27,16 @@ const ShopItemDetails = lazy(() =>
 const About = lazy(() =>
   import('./container/About' /* webpackChunkName: "about" */)
 );
-// const Login = lazy(() =>
-//   import('./container/Login' /* webpackChunkName: "login" */)
-// );
-// const Logout = lazy(() =>
-//   import('./container/Logout' /* webpackChunkName: "logout" */)
-// );
+const Login = lazy(() =>
+  import('./container/Login' /* webpackChunkName: "login" */)
+);
+const Logout = lazy(() =>
+  import('./container/Logout' /* webpackChunkName: "logout" */)
+);
 
 const App = () => {
+  useCurrentUserQuery();
+
   return (
     <div className='App'>
       <Navigation />
@@ -46,8 +49,8 @@ const App = () => {
           <Route path='/cart' element={<Cart />} />
           <Route path='/counter' element={<Counter />} />
           <Route path='/about' element={<About />} />
-          {/* <Route path='/login' element={<Login />} /> */}
-          {/* <Route path='/logout' element={<Logout />} /> */}
+          <Route path='/login' element={<Login />} />
+          <Route path='/logout' element={<Logout />} />
         </Routes>
       </Suspense>
 

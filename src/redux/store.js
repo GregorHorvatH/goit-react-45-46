@@ -3,6 +3,8 @@ import cart from './cart';
 import shop from './shop';
 import filter from './filter';
 import { cartApi } from './cartApi';
+import user from './user';
+import { userApi } from './userApi';
 
 import {
   persistStore,
@@ -35,12 +37,24 @@ const filterPersistConfig = {
 
 const persistedFilterReducer = persistReducer(filterPersistConfig, filter);
 
+// ----- filter persistor -----
+const userPersistConfig = {
+  key: 'user',
+  version: 1,
+  storage,
+  whitelist: ['token'],
+};
+
+const persistedUserReducer = persistReducer(userPersistConfig, user);
+
 export const store = configureStore({
   reducer: {
     cart: persistedCartReducer,
     [cartApi.reducerPath]: cartApi.reducer,
-    shop,
     filter: persistedFilterReducer,
+    shop,
+    user: persistedUserReducer,
+    [userApi.reducerPath]: userApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
