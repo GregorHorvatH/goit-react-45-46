@@ -24,6 +24,15 @@ export const userApi = createApi({
       invalidatesTags: ['User'],
     }),
 
+    // useLogoutMutation
+    logout: builder.mutation({
+      query: () => ({
+        url: '/logout',
+        method: 'POST',
+      }),
+      invalidatesTags: ['User'],
+    }),
+
     // useCurrentUserQuery
     currentUser: builder.query({
       query: () => '/current',
@@ -31,4 +40,5 @@ export const userApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useCurrentUserQuery } = userApi;
+export const { useLoginMutation, useLogoutMutation, useCurrentUserQuery } =
+  userApi;

@@ -36,11 +36,29 @@ export const userSlice = createSlice({
     //   }
     // );
 
+    // userSuccess
     builder.addMatcher(
       userApi.endpoints.currentUser.matchFulfilled,
       (state, { payload }) => {
         state.email = payload.email;
         state.name = payload.name;
+      }
+    );
+
+    // userLogout
+    builder.addMatcher(userApi.endpoints.logout.matchFulfilled, (state) => {
+      state.email = initialState.email;
+      state.name = initialState.name;
+      state.token = initialState.token;
+    });
+
+    // userError
+    builder.addMatcher(
+      userApi.endpoints.currentUser.matchRejected,
+      (state, { payload }) => {
+        if (payload.status === 401) {
+          state.token = '';
+        }
       }
     );
   },

@@ -1,4 +1,5 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense } from 'react';
+import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Navigation from './components/Navigation';
@@ -7,6 +8,7 @@ import { useCurrentUserQuery } from './redux/userApi';
 // import useShopData from './hooks/useShopData';
 // import useCartData from './hooks/useCartData';
 
+import PrivateRoutes from './components/PrivateRoutes';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Counter = lazy(() =>
@@ -35,7 +37,11 @@ const Logout = lazy(() =>
 );
 
 const App = () => {
-  useCurrentUserQuery();
+  const { token } = useSelector((state) => state.user);
+
+  useCurrentUserQuery(undefined, {
+    skip: !token,
+  });
 
   return (
     <div className='App'>
@@ -44,13 +50,17 @@ const App = () => {
       <Suspense fallback={<p>loading...</p>}>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/shop' element={<Shop />} />
-          <Route path='/shop/:itemId' element={<ShopItemDetails />} />
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/counter' element={<Counter />} />
+
+          <Route path='/' element={<PrivateRoutes />}>
+            <Route path='/shop' element={<Shop />} />
+            <Route path='/shop/:itemId' element={<ShopItemDetails />} />
+            <Route path='/cart' element={<Cart />} />
+            <Route path='/counter' element={<Counter />} />
+            <Route path='/logout' element={<Logout />} />
+          </Route>
+
           <Route path='/about' element={<About />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/logout' element={<Logout />} />
         </Routes>
       </Suspense>
 
